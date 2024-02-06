@@ -6,11 +6,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -174,7 +172,7 @@ fun DashboardContentUI(
     LazyColumn(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(12.dp),
-        contentPadding = PaddingValues(top = 32.dp, bottom = 32.dp),
+        contentPadding = PaddingValues(top = 32.dp, bottom = 128.dp),
         modifier = modifier
             .fillMaxSize()
             .background(Silver)
@@ -265,8 +263,10 @@ fun DashboardContentUI(
                 val scroll = rememberScrollState()
 
                 Column(
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
                     modifier = Modifier
                         .fillMaxWidth()
+                        .padding(top = 8.dp)
                         .wrapContentHeight(unbounded = false)
                         .verticalScroll(scroll)
                 ) {
@@ -275,7 +275,6 @@ fun DashboardContentUI(
                             linkData = linkData,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(top = 20.dp)
                         )
                     }
                 }
@@ -290,7 +289,7 @@ fun DashboardContentUI(
 
                 },
                 modifier = Modifier
-                    .fillMaxWidth(0.9f)
+                    .fillMaxWidth(fraction = 0.9f)
                     .padding(top = 8.dp)
             )
         }
@@ -310,9 +309,6 @@ fun DashboardContentUI(
             )
         }
 
-        item("bottom_spacer") {
-            Spacer(modifier = Modifier.height(32.dp))
-        }
     }
 }
 

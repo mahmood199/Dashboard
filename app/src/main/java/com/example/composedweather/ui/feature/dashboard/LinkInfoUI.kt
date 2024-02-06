@@ -94,6 +94,7 @@ fun LinkInfoUI(
                 Text(
                     text = linkData.title,
                     fontFamily = FigtreeRegular,
+                    color = Color.Black,
                     style = MaterialTheme.typography.bodyMedium
                 )
                 Text(

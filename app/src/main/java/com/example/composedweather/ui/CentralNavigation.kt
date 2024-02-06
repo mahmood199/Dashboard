@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.composedweather.ui.feature.dashboard.DashboardUIContainer
 import com.example.composedweather.ui.feature.home.HomeUI
+import com.example.composedweather.ui.feature.home_container.HomeContainerUI
 import com.example.composedweather.ui.feature.search.DetailUI
 import com.example.composedweather.ui.feature.splash.SplashUI
 import com.example.composedweather.ui.theme.ComposedWeatherTheme
@@ -29,7 +30,7 @@ fun CentralNavigation(
         composable(route = Screen.Splash.name) {
             SplashUI(
                 navigateToHome = {
-                    navController.navigate(route = Screen.Dashboard.name) {
+                    navController.navigate(route = Screen.HomeWithBottomBar.name) {
                         popUpTo(Screen.Splash.name) {
                             inclusive = true
                         }
@@ -67,6 +68,10 @@ fun CentralNavigation(
 
         composable(route = Screen.Dashboard.name) {
             DashboardUIContainer(openWhatsApp = openWhatsApp)
+        }
+
+        composable(route = Screen.HomeWithBottomBar.name) {
+            HomeContainerUI(openWhatsApp = openWhatsApp)
         }
 
 

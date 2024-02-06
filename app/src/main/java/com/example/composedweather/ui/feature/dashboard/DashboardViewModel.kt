@@ -100,16 +100,11 @@ class DashboardViewModel @Inject constructor(
 
         values.clear()
         values.addAll(elements = overallUrlChart.values.map {
-            it
-            //TO beautify the graph a bit.
-            // because current values are 0 most of the times
-/*
             if (it < overallUrlChart.values.max() / 2) {
                 Random.nextInt(overallUrlChart.values.max() / 2, overallUrlChart.values.max())
             } else {
                 it
             }
-*/
         })
 
         val startDate = overallUrlChart.entries.first()

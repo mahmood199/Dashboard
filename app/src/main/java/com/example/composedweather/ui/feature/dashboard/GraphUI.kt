@@ -117,7 +117,7 @@ fun GraphUI(
             },
             modifier = Modifier
                 .fillMaxWidth()
-                .aspectRatio(1f)
+                .aspectRatio(1.5f)
         )
 
     }
@@ -199,7 +199,7 @@ fun getDataSet(
         valueSet1.add(Entry(index * 10f, i.toFloat()))
     }
 
-    val barDataSet1 = LineDataSet(valueSet1, "Clicks")
+    val barDataSet1 = LineDataSet(valueSet1, "")
     barDataSet1.setDrawCircleHole(false)
     barDataSet1.setDrawCircles(false)
     barDataSet1.setDrawValues(false)
@@ -209,7 +209,6 @@ fun getDataSet(
     barDataSet1.setDrawFilled(true)
 
     barDataSet1.fillDrawable = ContextCompat.getDrawable(context, R.drawable.bg_line_chart)
-
 
     barDataSet1.lineWidth = 2f
     val dataSets = arrayListOf<LineDataSet>()
