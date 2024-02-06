@@ -2,6 +2,9 @@ package com.example.composedweather.util
 
 import android.annotation.SuppressLint
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 @SuppressLint("SimpleDateFormat")
 fun String.formatToDMMMY(): String {
@@ -29,4 +32,10 @@ fun String.formatToAMPM(): String {
         e.printStackTrace()
         "Error"
     }
+}
+
+fun formatDate(dateString: String): String {
+    val date = LocalDate.parse(dateString)
+    val formatter = DateTimeFormatter.ofPattern("d MMM", Locale.ENGLISH)
+    return date.format(formatter)
 }

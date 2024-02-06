@@ -113,4 +113,7 @@ dependencies {
     implementation(libs.play.services.location)
     implementation(libs.accompanist.permissions)
 
+    implementation(libs.mp.android.chart)
+    implementation(libs.compose.constraint.layout)
+    implementation(libs.kotlinx.collections.immutable)
 }
