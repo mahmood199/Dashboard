@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
@@ -33,29 +34,32 @@ fun AnalyticsSectionUI(
     Column(
         modifier = modifier
             .wrapContentSize()
-            .clip(RoundedCornerShape(12))
+            .clip(RoundedCornerShape(10))
             .background(Color.White)
             .aspectRatio(1f)
-            .padding(12.dp)
+            .padding(horizontal = 16.dp, vertical = 16.dp)
     ) {
         Icon(
             imageVector = ImageVector.vectorResource(item.resourceId),
             contentDescription = null,
             tint = Color.Unspecified,
+            modifier = Modifier.size(32.dp)
         )
 
         Text(
             text = item.title,
             fontFamily = FigtreeRegular,
             color = Color.Black,
+            maxLines = 1,
             style = MaterialTheme.typography.bodyLarge,
-            modifier = Modifier.padding(top = 12.dp)
+            modifier = Modifier.padding(top = 20.dp)
         )
 
         Text(
             text = item.subTitle,
             color = SilverChalice,
             fontFamily = FigtreeBold,
+            maxLines = 1,
             style = MaterialTheme.typography.bodyMedium,
             modifier = Modifier.padding(top = 6.dp)
         )

@@ -100,6 +100,9 @@ fun GraphUI(
                             }
                         }
 
+                        xAxis.textColor = SilverChalice.toArgb()
+                        axisLeft.textColor = SilverChalice.toArgb()
+
                         axisRight.isEnabled = false
                     }
 
@@ -178,15 +181,6 @@ fun GraphUIHeaderContent(
 
     }
 
-}
-
-private fun getXAxisValues(
-    lineChart: LineChart,
-    dates: PersistentList<String>
-): XAxis {
-    val xAxis = lineChart.xAxis
-    xAxis.valueFormatter = IndexAxisValueFormatter(dates)
-    return xAxis
 }
 
 fun getDataSet(

@@ -55,6 +55,7 @@ fun HollowButtonUI(
         )
         Text(
             text = ctaText,
+            maxLines = 1,
             color = SilverChalice,
         )
     }
