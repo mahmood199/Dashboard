@@ -36,12 +36,16 @@ import com.example.composedweather.ui.theme.ElectricBlue
 import com.example.composedweather.ui.theme.FigtreeRegular
 import com.example.composedweather.ui.theme.SilverChalice
 import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import com.github.mikephil.charting.formatter.ValueFormatter
+import com.github.mikephil.charting.renderer.XAxisRenderer
+import com.github.mikephil.charting.utils.Transformer
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.toPersistentList
 
@@ -70,10 +74,9 @@ fun GraphUI(
                     .apply {
 
                         val lineData = LineData(
-                            getDataSet2(
-                                context,
-                                values = values,
-                                dates = dates
+                            getDataSet(
+                                context = context,
+                                values = values
                             ).toList(),
                         )
 
@@ -82,18 +85,22 @@ fun GraphUI(
 
                         val description = Description()
                         this.description = description.apply {
-                            text = "Initial setup"
+                            text = ""
                         }
 
                         setDrawBorders(false)
                         setBorderColor(Color.Transparent.toArgb())
 
+                        xAxis.position = XAxis.XAxisPosition.BOTTOM
 
-                        getXAxisValues(this)
-
+                        xAxis.valueFormatter = object : ValueFormatter() {
+                            override fun getAxisLabel(value: Float, axis: AxisBase?): String {
+                                val startDate = value / 10
+                                return dates[startDate.toInt()]
+                            }
+                        }
 
                         axisRight.isEnabled = false
-
                     }
 
                 lineChart.animateXY(200, 200)
@@ -173,17 +180,18 @@ fun GraphUIHeaderContent(
 
 }
 
-private fun getXAxisValues(lineChart: LineChart): XAxis {
-    val xAxis: XAxis = lineChart.xAxis
-    val labels = arrayOf("Jan", "Feb", "Mar", "Apr", "May") // Custom labels
-    xAxis.valueFormatter = IndexAxisValueFormatter(labels)
+private fun getXAxisValues(
+    lineChart: LineChart,
+    dates: PersistentList<String>
+): XAxis {
+    val xAxis = lineChart.xAxis
+    xAxis.valueFormatter = IndexAxisValueFormatter(dates)
     return xAxis
 }
 
-fun getDataSet2(
+fun getDataSet(
     context: Context,
-    values: PersistentList<Int>,
-    dates: PersistentList<String>
+    values: PersistentList<Int>
 ): ArrayList<LineDataSet> {
     val valueSet1 = ArrayList<Entry>()
 
