@@ -61,9 +61,15 @@ fun DashboardUIContainer(
 
     val linkInfo = viewModel.linkInfo.toPersistentList()
 
+    val dates = viewModel.dates.toPersistentList()
+
+    val values = viewModel.values.toPersistentList()
+
     DashboardUI(
         state = state,
         linkInfo = linkInfo,
+        dates = dates,
+        values = values,
         openWhatsApp = openWhatsApp,
         modifier = modifier.systemBarsPadding()
     )
@@ -73,6 +79,8 @@ fun DashboardUIContainer(
 fun DashboardUI(
     state: DashboardViewState,
     linkInfo: PersistentList<Pair<String, List<LinkData>>>,
+    dates: PersistentList<String>,
+    values: PersistentList<Int>,
     openWhatsApp: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -87,6 +95,8 @@ fun DashboardUI(
             AnotherLayerOfConstraintLayoutWrapper(
                 state = state,
                 linkInfo = linkInfo,
+                dates = dates,
+                values = values,
                 openWhatsApp = openWhatsApp
             )
         }
@@ -97,6 +107,8 @@ fun DashboardUI(
 fun AnotherLayerOfConstraintLayoutWrapper(
     state: DashboardViewState,
     linkInfo: PersistentList<Pair<String, List<LinkData>>>,
+    dates: PersistentList<String>,
+    values: PersistentList<Int>,
     openWhatsApp: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -120,6 +132,8 @@ fun AnotherLayerOfConstraintLayoutWrapper(
         DashboardContentUI(
             state = state,
             linkInfo = linkInfo,
+            dates = dates,
+            values = values,
             openWhatsApp = openWhatsApp,
             modifier = Modifier
                 .constrainAs(lazyColumn) {
@@ -140,6 +154,8 @@ fun AnotherLayerOfConstraintLayoutWrapper(
 fun DashboardContentUI(
     state: DashboardViewState,
     linkInfo: PersistentList<Pair<String, List<LinkData>>>,
+    dates: PersistentList<String>,
+    values: PersistentList<Int>,
     openWhatsApp: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -174,6 +190,8 @@ fun DashboardContentUI(
         item(key = "Graph") {
             GraphUI(
                 state = state,
+                dates = dates,
+                values = values,
                 modifier = Modifier
                     .fillMaxWidth(0.9f)
                     .clip(RoundedCornerShape(12.dp))
@@ -310,6 +328,12 @@ fun DashboardUIPreview() {
             state = state,
             linkInfo = mutableListOf(
                 Pair("One", listOf(LinkData.default()))
+            ).toPersistentList(),
+            dates = mutableListOf(
+                ""
+            ).toPersistentList(),
+            values = mutableListOf(
+                1
             ).toPersistentList(),
             openWhatsApp = {
 

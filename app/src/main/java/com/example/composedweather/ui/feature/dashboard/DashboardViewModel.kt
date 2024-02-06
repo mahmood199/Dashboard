@@ -17,6 +17,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import javax.inject.Inject
+import kotlin.random.Random
 
 @HiltViewModel
 class DashboardViewModel @Inject constructor(
@@ -29,6 +30,10 @@ class DashboardViewModel @Inject constructor(
     private val stateLock = Mutex()
 
     val linkInfo = mutableStateListOf<Pair<String, List<LinkData>>>()
+
+    var dates = mutableStateListOf<String>()
+
+    val values = mutableStateListOf<Int>()
 
 
     init {
@@ -81,13 +86,34 @@ class DashboardViewModel @Inject constructor(
 
     private suspend fun updateDateSafely(overallUrlChart: Map<String, Int>) {
         Log.d("DashboardViewModel", overallUrlChart.toString())
+
+
         if (overallUrlChart.entries.isEmpty())
             return
 
+        dates.clear()
+        dates.addAll(
+            elements = overallUrlChart.keys.map {
+                formatDate(it)
+            }
+        )
+
+        values.clear()
+        values.addAll(elements = overallUrlChart.values.map {
+            it
+            //TO beautify the graph a bit.
+            // because current values are 0 most of the times
+/*
+            if (it < overallUrlChart.values.max() / 2) {
+                Random.nextInt(overallUrlChart.values.max() / 2, overallUrlChart.values.max())
+            } else {
+                it
+            }
+*/
+        })
+
         val startDate = overallUrlChart.entries.first()
         val endDate = overallUrlChart.entries.last()
-
-        Log.d("DashboardViewModel", overallUrlChart.toString())
 
         val startDateToDisplay = formatDate(dateString = startDate.key)
         val endDateToDisplay = formatDate(dateString = endDate.key)

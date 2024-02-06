@@ -139,7 +139,7 @@ fun LinkInfoUI(
                 .padding(12.dp)
         ) {
             Text(
-                text = linkData.smartLink,
+                text = linkData.webLink,
                 color = ElectricBlue,
                 style = MaterialTheme.typography.bodyMedium,
                 fontFamily = FigtreeRegular,
