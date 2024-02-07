@@ -52,10 +52,6 @@ class NetworkModule {
             logger = Logger.DEFAULT
             level = LogLevel.ALL
         }
-
-        defaultRequest {
-            header(HttpHeaders.Authorization, AUTHORIZATION_TOKEN)
-        }
     }
 
     @Provides

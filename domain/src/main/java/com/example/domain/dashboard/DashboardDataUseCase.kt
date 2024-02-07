@@ -13,7 +13,11 @@ class DashboardDataUseCase @Inject constructor(
 ) {
 
     suspend fun getDashboard(): NetworkResult<DashboardResponse> {
-        val authToken = userPreferenceRepository.getUserPreferences().first().bearerToken
+        var authToken = userPreferenceRepository.getUserPreferences().first().bearerToken
+        if (authToken.isEmpty()) {
+            userPreferenceRepository.setAuthToken()
+            authToken = userPreferenceRepository.getUserPreferences().first().bearerToken
+        }
         return dashboardRepository.getDashboard(authToken)
     }
 
