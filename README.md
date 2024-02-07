@@ -33,7 +33,6 @@ A simple dashboard app for OpenInApp assignment
 - [Ktor](https://github.com/ktorio/ktor.git)
 - [Gson](https://github.com/google/gson)
 - [Preference Data Store](https://developer.android.com/topic/libraries/architecture/datastore)
-- [Fused Location Provider](https://developers.google.com/location-context/fused-location-provider/)
 
    *Tooling/Project setup*
 - [Gradle secrets plugin](https://github.com/google/secrets-gradle-plugin)
