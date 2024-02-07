@@ -7,13 +7,19 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.FloatingActionButtonDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Outline
 import androidx.compose.ui.graphics.Path
@@ -25,8 +31,9 @@ import androidx.compose.ui.unit.dp
 import com.example.composedweather.ui.feature.home_container.BottomBarItem
 import com.example.composedweather.ui.feature.home_container.BottomNavScreen
 import com.example.composedweather.ui.theme.ComposedWeatherTheme
+import com.example.composedweather.ui.theme.ElectricBlue
 
-class MiddleBulgeShape : Shape {
+class MiddleBulgeShapeV2 : Shape {
 
     override fun createOutline(
         size: Size,
@@ -51,22 +58,19 @@ class MiddleBulgeShape : Shape {
 
             lineTo(width * 0.0f, topHeight)
 
-            lineTo(width * 0.45f, topHeight)
+            lineTo(width * 0.45f - circleRadiusInPx, topHeight)
 
 
-            arcTo(
-                rect = Rect(
-                    left = width * 0.45f - circleRadiusInPx,
-                    top = 0f,
-                    right = width * 0.55f + circleRadiusInPx,
-                    bottom = circleRadiusInPx * 2
-                ),
-                startAngleDegrees = 180f,
-                sweepAngleDegrees = 180f,
-                forceMoveTo = false
+            cubicTo(
+                x1 = width * 0.45f - circleRadiusInPx,
+                y1 = topHeight,
+                x2 = width * 0.5f,
+                y2 = -20f,
+                x3 = width * 0.55f + circleRadiusInPx,
+                y3 = topHeight
             )
 
-            lineTo(width * 0.55f, topHeight)
+            lineTo(width * 0.55f + circleRadiusInPx, topHeight)
 
             lineTo(width * 1.0f, topHeight)
 
@@ -82,14 +86,13 @@ class MiddleBulgeShape : Shape {
 
 @Preview
 @Composable
-fun MiddleBulgeShapePreview() {
+fun MiddleBulgeShapeV2Preview() {
     ComposedWeatherTheme {
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .background(Color.Blue)
         ) {
-
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -98,7 +101,6 @@ fun MiddleBulgeShapePreview() {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .align(Alignment.BottomCenter)
                 ) {
                     val bottomBarItem = remember {
                         buildList {
@@ -113,8 +115,9 @@ fun MiddleBulgeShapePreview() {
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .clip(MiddleBulgeShape())
-                            .background(Color.White),
+                            .clip(MiddleBulgeShapeV2())
+                            .background(Color.White)
+                            .padding(vertical = 12.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         bottomBarItem.forEachIndexed { index, screens ->
@@ -124,7 +127,8 @@ fun MiddleBulgeShapePreview() {
                                         modifier = Modifier
                                             .weight(1f)
                                             .aspectRatio(1f)
-                                    )
+                                    ) {
+                                    }
                                 }
 
                                 else -> {
@@ -149,8 +153,8 @@ fun MiddleBulgeShapePreview() {
                         .align(Alignment.TopCenter)
                         .padding(top = 12.dp)
                 )
-
             }
+
         }
     }
 }
