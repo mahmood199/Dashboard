@@ -1,21 +1,12 @@
 Summary
 
-A simple weather app that gets your location or you search for location and displays the forecast for that day and a few days after that. Also it shows various other metrics like humidity, temperature, rain and precipitation.
-
+A simple dashboard app for OpenInApp assignment
 
 *API :* 
-1. [OpenWeatherMap](https://open-meteo.com/en/docs) - To get the metrics for weather. Also this is free and provides a lot of parameters for weather.
-2. [Nomatim](https://nominatim.openstreetmap.org/) - To get the location co-ordinates(latitude/longitude) as per user search. This is also free to use.
+1. [OpenInAppApp]([https://open-meteo.com/en/docs](https://api.inopenapp.com/api/v1/dashboardNew )) - To get the dashboard data
 
-
-Reason for choosing mentioned API :
-1. Both the APIs are free to use for small projects.
-2. Wide audience of apps use this api. Hence its reliable.
-3. Flexible - Many more fields can be requested from the same response body by adding to it. Hence avoiding duplicate fields across response classes.
 
 # Pre-requisite 📝
-
-In your `local.properties` you will need to add your Open Weather API key and copy the urls in.
 
 ```properties
   Just clone the repo and run.
@@ -39,7 +30,7 @@ In your `local.properties` you will need to add your Open Weather API key and co
 - [Landscapist](https://github.com/skydoves/landscapist) 
 
   *Data*
-- [Ktor](https://square.github.io/retrofit/)
+- [Ktor](https://github.com/ktorio/ktor.git)
 - [Gson](https://github.com/google/gson)
 - [Preference Data Store](https://developer.android.com/topic/libraries/architecture/datastore)
 - [Fused Location Provider](https://developers.google.com/location-context/fused-location-provider/)
@@ -102,7 +93,7 @@ The folders are split into 5 boundaries:
 As for every other project there is always some room for improvement.
 Additio of these were not possible due to time constraints.
 Things that are worth adding
-1. Modularization.
+1. Feature wise Modularization.
 2. Testing.
 3. Adding UseCase as an intermediate between viewModel and repository.
 4. Add corresponding UI model class for each remote model class
