@@ -25,9 +25,10 @@ android {
 
     signingConfigs {
         register("release") {
-            storePassword = "StorePassword"
-            keyAlias = "KeyAlias"
-            keyPassword = "KeyPassword"
+            storePassword = "Mahmood"
+            keyAlias = "key0"
+            storeFile = file("./music_player_key_store.key")
+            keyPassword = "Mahmood"
         }
     }
 
@@ -37,7 +38,9 @@ android {
             isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
     compileOptions {
