@@ -8,11 +8,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.composedweather.ui.feature.home_container.HomeContainerUI
 import com.example.composedweather.ui.theme.ComposedWeatherTheme
+import com.example.data.model.response.LinkData
 
 @Composable
 fun CentralNavigation(
     backPress: () -> Unit,
     openWhatsApp: (String) -> Unit,
+    onLinkClicked: (LinkData) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val navController = rememberNavController()
@@ -23,7 +25,10 @@ fun CentralNavigation(
         modifier = modifier
     ) {
         composable(route = Screen.HomeWithBottomBar.name) {
-            HomeContainerUI(openWhatsApp = openWhatsApp)
+            HomeContainerUI(
+                openWhatsApp = openWhatsApp,
+                onLinkClicked = onLinkClicked
+            )
         }
     }
 }
@@ -37,6 +42,9 @@ fun CentralNavigationPreview() {
 
             },
             openWhatsApp = {
+
+            },
+            onLinkClicked = {
 
             }
         )

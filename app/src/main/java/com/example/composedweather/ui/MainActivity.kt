@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.view.WindowCompat
 import com.example.composedweather.ui.theme.ComposedWeatherTheme
+import com.example.data.model.response.LinkData
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,10 +28,18 @@ class MainActivity : ComponentActivity() {
                     },
                     openWhatsApp = {
                         openWhatsApp(it)
+                    },
+                    onLinkClicked = {
+                        openLinkInBrowser(it)
                     }
                 )
             }
         }
+    }
+
+    private fun openLinkInBrowser(it: LinkData) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(it.webLink))
+        startActivity(intent)
     }
 
     private fun openWhatsApp(phoneNumber: String) {
@@ -53,7 +62,10 @@ fun GreetingPreview() {
     ComposedWeatherTheme {
         CentralNavigation(
             backPress = {},
-            openWhatsApp = {}
+            openWhatsApp = {},
+            onLinkClicked = {
+
+            }
         )
     }
 }

@@ -31,10 +31,12 @@ import com.example.composedweather.ui.feature.dashboard.DashboardUIContainer
 import com.example.composedweather.ui.theme.ComposedWeatherTheme
 import com.example.composedweather.ui.theme.FigtreeSemiBold
 import com.example.composedweather.ui.theme.SilverChalice
+import com.example.data.model.response.LinkData
 
 @Composable
 fun HomeContainerUI(
     openWhatsApp: (String) -> Unit,
+    onLinkClicked: (LinkData) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeContainerViewModel = hiltViewModel()
 ) {
@@ -68,6 +70,7 @@ fun HomeContainerUI(
     ) {
         DashboardUIContainer(
             openWhatsApp = openWhatsApp,
+            onLinkClicked = onLinkClicked,
             modifier = Modifier
                 .padding(bottom = it.calculateBottomPadding() - it.calculateBottomPadding())
         )
@@ -128,7 +131,12 @@ fun BottomBarItem(
 fun HomeContainerUIPreview() {
     ComposedWeatherTheme {
         HomeContainerUI(
-            openWhatsApp = {},
+            openWhatsApp = {
+                           
+            },
+            onLinkClicked = {
+
+            },
             modifier = Modifier.fillMaxSize()
         )
     }

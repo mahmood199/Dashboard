@@ -40,6 +40,7 @@ import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
 fun LinkInfoUI(
+    onItemClicked: (LinkData) -> Unit,
     linkData: LinkData,
     modifier: Modifier = Modifier
 ) {
@@ -51,6 +52,9 @@ fun LinkInfoUI(
             .clip(RoundedCornerShape(12.dp))
             .background(Color.White)
             .padding(top = 12.dp)
+            .clickable {
+                onItemClicked(linkData)
+            }
     ) {
         Row(
             modifier = Modifier
@@ -135,7 +139,7 @@ fun LinkInfoUI(
                     shape = RoundedCornerShape(bottomEnd = 12.dp, bottomStart = 12.dp)
                 )
                 .clickable {
-
+                    onItemClicked(linkData)
                 }
                 .padding(12.dp)
         ) {
@@ -146,6 +150,7 @@ fun LinkInfoUI(
                 fontFamily = FigtreeRegular,
                 modifier = Modifier.weight(1f)
             )
+
             Icon(
                 imageVector = ImageVector.vectorResource(R.drawable.ic_copy_files),
                 contentDescription = null,
@@ -169,6 +174,9 @@ fun LinkInfoUIPreview() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             LinkInfoUI(
+                onItemClicked = {
+
+                },
                 linkData = linkData,
                 modifier = Modifier
                     .fillMaxWidth(0.9f)

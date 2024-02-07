@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -49,6 +48,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun DashboardUIContainer(
     openWhatsApp: (String) -> Unit,
+    onLinkClicked: (LinkData) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: DashboardViewModel = hiltViewModel()
 ) {
@@ -67,6 +67,7 @@ fun DashboardUIContainer(
         dates = dates,
         values = values,
         openWhatsApp = openWhatsApp,
+        onLinkClicked = onLinkClicked,
         modifier = modifier.systemBarsPadding()
     )
 }
@@ -78,6 +79,7 @@ fun DashboardUI(
     dates: PersistentList<String>,
     values: PersistentList<Int>,
     openWhatsApp: (String) -> Unit,
+    onLinkClicked: (LinkData) -> Unit,
     modifier: Modifier = Modifier
 ) {
     AnimatedContent(
@@ -97,7 +99,8 @@ fun DashboardUI(
                 linkInfo = linkInfo,
                 dates = dates,
                 values = values,
-                openWhatsApp = openWhatsApp
+                openWhatsApp = openWhatsApp,
+                onLinkClicked = onLinkClicked
             )
         }
     }
@@ -110,6 +113,7 @@ fun AnotherLayerOfConstraintLayoutWrapper(
     dates: PersistentList<String>,
     values: PersistentList<Int>,
     openWhatsApp: (String) -> Unit,
+    onLinkClicked: (LinkData) -> Unit,
     modifier: Modifier = Modifier
 ) {
     ConstraintLayout(
@@ -135,6 +139,7 @@ fun AnotherLayerOfConstraintLayoutWrapper(
             dates = dates,
             values = values,
             openWhatsApp = openWhatsApp,
+            onLinkClicked = onLinkClicked,
             modifier = Modifier
                 .constrainAs(lazyColumn) {
                     top.linkTo(header.bottom)
@@ -157,19 +162,12 @@ fun DashboardContentUI(
     dates: PersistentList<String>,
     values: PersistentList<Int>,
     openWhatsApp: (String) -> Unit,
+    onLinkClicked: (LinkData) -> Unit,
     modifier: Modifier = Modifier
 ) {
     var selectedTab by remember {
         mutableIntStateOf(0)
     }
-
-    val pager = rememberPagerState(
-        initialPage = selectedTab,
-    ) {
-        linkInfo.size
-    }
-
-    val scope = rememberCoroutineScope()
 
     val page = remember(linkInfo[selectedTab]) {
         linkInfo[selectedTab]
@@ -244,9 +242,6 @@ fun DashboardContentUI(
                 selectedTab = selectedTab,
                 onTabChanged = {
                     selectedTab = it
-                    scope.launch {
-                        pager.animateScrollToPage(it)
-                    }
                 },
                 modifier = Modifier
                     .fillMaxWidth(0.9f)
@@ -276,6 +271,9 @@ fun DashboardContentUI(
             ) {
                 val linkData = page.second[it]
                 LinkInfoUI(
+                    onItemClicked = {
+                        onLinkClicked(it)
+                    },
                     linkData = linkData,
                     modifier = Modifier
                         .fillMaxWidth(0.9f)
@@ -334,6 +332,9 @@ fun DashboardUIPreview() {
                 1
             ).toPersistentList(),
             openWhatsApp = {
+
+            },
+            onLinkClicked = {
 
             }
         )
