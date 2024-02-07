@@ -6,6 +6,8 @@ import com.example.data.model.response.DashboardResponse
 import com.google.gson.Gson
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
+import io.ktor.http.HttpHeaders
+import io.ktor.http.append
 import java.io.IOException
 import javax.inject.Inject
 
@@ -21,9 +23,10 @@ class DashboardRemoteDataSource @Inject constructor(
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjU5MjcsImlhdCI6MTY3NDU1MDQ1MH0.dCkW0ox8tbjJA2GgUx2UEwNlbTZ7Rr38PVFJevYcXFI"
     }
 
-    suspend fun getDashboardData(): NetworkResult<DashboardResponse> {
+    suspend fun getDashboardData(authToken: String): NetworkResult<DashboardResponse> {
         return try {
             val response = httpClient.get(URL) {
+                headers.append(HttpHeaders.Authorization, authToken)
             }
             val result = responseProcessor.getResultFromResponse<DashboardResponse>(gson, response)
             result

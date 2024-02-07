@@ -10,8 +10,8 @@ class DashboardRepositoryImpl @Inject constructor(
     private val dataSource: DashboardRemoteDataSource,
 ) : DashboardRepository {
 
-    override suspend fun getDashboard(): NetworkResult<DashboardResponse> {
-        return dataSource.getDashboardData()
+    override suspend fun getDashboard(authToken: String): NetworkResult<DashboardResponse> {
+        return dataSource.getDashboardData(authToken)
     }
 
 }

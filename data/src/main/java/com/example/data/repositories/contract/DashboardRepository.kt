@@ -5,6 +5,6 @@ import com.example.data.model.response.DashboardResponse
 
 interface DashboardRepository {
 
-    suspend fun getDashboard(): NetworkResult<DashboardResponse>
+    suspend fun getDashboard(authToken: String): NetworkResult<DashboardResponse>
 
 }
