@@ -79,13 +79,13 @@ The folders are split into 5 boundaries:
 
 |                         Home(Dashboard)                       |
 |:---------------------------------------------------------:|
-| <img src="![WhatsApp Image 2024-02-07 at 13 08 15_f381925e](https://github.com/mahmood199/Dashboard/assets/58071934/2a3e5809-2201-4b48-a209-8bfb071b33bd)" width="200px"> |
+| <img src="![WhatsApp Image 2024-02-07 at 13 08 15_f381925e](https://github.com/mahmood199/Dashboard/assets/58071934/2a3e5809-2201-4b48-a209-8bfb071b33bd)" > |
 
 
 
 |                         Home(Dashboard)                       |
 |:---------------------------------------------------------:|
-| <img src="![WhatsApp Image 2024-02-07 at 13 08 16_06c01c8a](https://github.com/mahmood199/Dashboard/assets/58071934/c63fd77a-0bbd-4639-929f-00449e227dce)" width="200px"> |
+| <img src="![WhatsApp Image 2024-02-07 at 13 08 16_06c01c8a](https://github.com/mahmood199/Dashboard/assets/58071934/c63fd77a-0bbd-4639-929f-00449e227dce)" > |
 
 
 
