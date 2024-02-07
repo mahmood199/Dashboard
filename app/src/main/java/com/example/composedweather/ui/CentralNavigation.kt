@@ -7,7 +7,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.composedweather.ui.feature.dashboard.DashboardUIContainer
 import com.example.composedweather.ui.feature.home.HomeUI
+import com.example.composedweather.ui.feature.home_container.HomeContainerUI
 import com.example.composedweather.ui.feature.search.DetailUI
 import com.example.composedweather.ui.feature.splash.SplashUI
 import com.example.composedweather.ui.theme.ComposedWeatherTheme
@@ -15,6 +17,7 @@ import com.example.composedweather.ui.theme.ComposedWeatherTheme
 @Composable
 fun CentralNavigation(
     backPress: () -> Unit,
+    openWhatsApp: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val navController = rememberNavController()
@@ -27,7 +30,7 @@ fun CentralNavigation(
         composable(route = Screen.Splash.name) {
             SplashUI(
                 navigateToHome = {
-                    navController.navigate(route = Screen.Home.name) {
+                    navController.navigate(route = Screen.HomeWithBottomBar.name) {
                         popUpTo(Screen.Splash.name) {
                             inclusive = true
                         }
@@ -63,6 +66,14 @@ fun CentralNavigation(
             })
         }
 
+        composable(route = Screen.Dashboard.name) {
+            DashboardUIContainer(openWhatsApp = openWhatsApp)
+        }
+
+        composable(route = Screen.HomeWithBottomBar.name) {
+            HomeContainerUI(openWhatsApp = openWhatsApp)
+        }
+
 
     }
 
@@ -73,7 +84,12 @@ fun CentralNavigation(
 fun CentralNavigationPreview() {
     ComposedWeatherTheme {
         CentralNavigation(
-            backPress = {}
+            backPress = {
+
+            },
+            openWhatsApp = {
+
+            }
         )
     }
 }
