@@ -24,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.composedweather.R
 import com.example.composedweather.ui.theme.ComposedWeatherTheme
+import com.example.composedweather.ui.theme.FigtreeSemiBold
 import com.example.composedweather.ui.theme.SilverChalice
 
 @Composable
@@ -49,14 +50,15 @@ fun HollowButtonUI(
         Icon(
             imageVector = imageVector,
             contentDescription = null,
-            tint = SilverChalice,
+            tint = Color.Black,
             modifier = Modifier
                 .padding(end = 4.dp)
         )
         Text(
             text = ctaText,
             maxLines = 1,
-            color = SilverChalice,
+            fontFamily = FigtreeSemiBold,
+            color = Color.Black,
         )
     }
 
