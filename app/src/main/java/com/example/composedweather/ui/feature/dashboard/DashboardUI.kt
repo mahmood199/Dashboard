@@ -4,20 +4,15 @@ import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.pager.VerticalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -32,6 +27,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -41,6 +37,7 @@ import com.example.composedweather.R
 import com.example.composedweather.ui.common.ContentLoaderUI
 import com.example.composedweather.ui.theme.ComposedWeatherTheme
 import com.example.composedweather.ui.theme.ElectricBlue
+import com.example.composedweather.ui.theme.FigtreeExtraBold
 import com.example.composedweather.ui.theme.Silver
 import com.example.data.model.response.AnalyticSection
 import com.example.data.model.response.LinkData
@@ -89,9 +86,11 @@ fun DashboardUI(
         modifier = modifier.fillMaxSize()
     ) {
         if (it) {
-            ContentLoaderUI(modifier = Modifier
-                .fillMaxSize()
-                .background(Color.White))
+            ContentLoaderUI(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.White)
+            )
         } else {
             AnotherLayerOfConstraintLayoutWrapper(
                 state = state,
@@ -172,6 +171,10 @@ fun DashboardContentUI(
 
     val scope = rememberCoroutineScope()
 
+    val page = remember(linkInfo[selectedTab]) {
+        linkInfo[selectedTab]
+    }
+
     LazyColumn(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(12.dp),
@@ -251,36 +254,32 @@ fun DashboardContentUI(
             )
         }
 
-        item("pager") {
-            VerticalPager(
-                userScrollEnabled = false,
-                state = pager,
-                modifier = Modifier
-                    .fillMaxWidth(0.9f)
-                    .aspectRatio(0.5f)
-            ) {
-                val page = remember(linkInfo[it]) {
-                    linkInfo[it]
-                }
-
-                val scroll = rememberScrollState()
-
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(12.dp),
+        if (page.second.isEmpty()) {
+            item("empty-ui-item") {
+                Text(
+                    text = "No links for this section",
+                    color = Color.Black,
+                    fontFamily = FigtreeExtraBold,
+                    textAlign = TextAlign.Center,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(top = 8.dp)
-                        .wrapContentHeight(unbounded = false)
-                        .verticalScroll(scroll)
-                ) {
-                    page.second.forEachIndexed { index, linkData ->
-                        LinkInfoUI(
-                            linkData = linkData,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                        )
-                    }
+                        .padding(24.dp)
+                )
+            }
+        } else {
+            items(
+                count = page.second.size,
+                key = {
+                    val linkData = page.second[it]
+                    "${linkData.urlId}-${it}"
                 }
+            ) {
+                val linkData = page.second[it]
+                LinkInfoUI(
+                    linkData = linkData,
+                    modifier = Modifier
+                        .fillMaxWidth(0.9f)
+                )
             }
         }
 
