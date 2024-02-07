@@ -154,7 +154,6 @@ fun AnotherLayerOfConstraintLayoutWrapper(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun DashboardContentUI(
     state: DashboardViewState,
@@ -183,7 +182,7 @@ fun DashboardContentUI(
     ) {
         item(key = "Header") {
             HeaderUI(
-                title = "Good morning",
+                title = state.greetingMessage,
                 subTitle = "Ajay Manva \uD83D\uDC4B",
                 modifier = Modifier.fillMaxWidth(0.9f)
             )

@@ -1,9 +1,11 @@
 package com.example.composedweather.ui.feature.dashboard
 
 import android.util.Log
+import androidx.compose.animation.core.updateTransition
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.room.util.copy
 import com.example.composedweather.util.formatDate
 import com.example.core_network.NetworkResult
 import com.example.data.model.response.DashboardResponse
@@ -16,6 +18,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import java.util.Calendar
 import javax.inject.Inject
 import kotlin.random.Random
 
@@ -38,6 +41,7 @@ class DashboardViewModel @Inject constructor(
 
     init {
         fetchDashboard()
+        updateGreetingMessage()
     }
 
     private fun fetchDashboard() {
@@ -84,10 +88,29 @@ class DashboardViewModel @Inject constructor(
         }
     }
 
+    private fun updateGreetingMessage() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val greetingMessage = generateGreetingMessage()
+            updateState {
+                copy(greetingMessage = greetingMessage)
+            }
+        }
+    }
+
+    private fun generateGreetingMessage(): String {
+        val calendar = Calendar.getInstance()
+        val hourOfDay = calendar.get(Calendar.HOUR_OF_DAY)
+
+        return when (hourOfDay) {
+            in 0..11 -> "Good morning!"
+            in 12..16 -> "Good afternoon"
+            in 17..20 -> "Good evening!"
+            else -> "Good night!"
+        }
+    }
+
     private suspend fun updateDateSafely(overallUrlChart: Map<String, Int>) {
         Log.d("DashboardViewModel", overallUrlChart.toString())
-
-
         if (overallUrlChart.entries.isEmpty())
             return
 
