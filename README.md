@@ -3,7 +3,7 @@ Summary
 A simple dashboard app for OpenInApp assignment
 
 *API :* 
-1. [OpenInAppApp]([https://open-meteo.com/en/docs](https://api.inopenapp.com/api/v1/dashboardNew )) - To get the dashboard data
+1. [OpenInApp]([https://open-meteo.com/en/docs](https://api.inopenapp.com/api/v1/dashboardNew )) - To get the dashboard data
 
 
 # Pre-requisite 📝
@@ -42,23 +42,29 @@ A simple dashboard app for OpenInApp assignment
 # Design/Architectural decisions 📐
 
 The project follows common android patterns in modern android codebases. 
-P.S - The modularization of this can result in better codebase structure.
+P.S - I've done layer wise modularization but feature modularization of this can result in better codebase structure.
 
 **Project Structure**
 
-The folders are split into 5 boundaries:
+The folders are split into 6 modules:
  - **Connection**:
    Contains the classes that are required for keeping an eye on mobile network connectivity. This in itself can be a separate module for identifying and observing device connectivity events.
 
- - **Core**:
-   Contains the classes that are required for platform specific code. Like setting up network client, user Preferences. Basically this is the inner most layer of data.
+ - **Core-Local**:
+   Contains the classes that are required for platform specific code. Like setting up user Preferences. Basically this is the inner most layer of data.
+
+ - **Core-Network**:
+   Contains the classes that are required for platform specific code. Like setting up network client. Basically this is the inner most layer of data.
 
  - **Data**:
    This package contains models, data sources, both local or remote and repositories as well. All data related actions and formatting happens in this layer as well.
    It also contains framework related dependencies to co-ordinate and create instances of data stores like a database or shared preference etc.
    The repository pattern, is used, which mediates data sources and acts as a source of truth to the consumer.
 
- - **UI**:
+ - **Domain**:
+   For modification of data as per UI. These modification dont reflect on data layer. This is fexible in nature
+  
+ - **App**:
 
    This is the presentation layer of the app.
    This is further divided into 3 parts.
@@ -78,13 +84,13 @@ The folders are split into 5 boundaries:
 
 |                         Home(Dashboard)                       |
 |:---------------------------------------------------------:|
-| <img src="![WhatsApp Image 2024-02-07 at 13 08 15_f381925e](https://github.com/mahmood199/Dashboard/assets/58071934/2a3e5809-2201-4b48-a209-8bfb071b33bd)" > |
+| ![WhatsApp Image 2024-02-07 at 13 08 15_f381925e](https://github.com/mahmood199/Dashboard/assets/58071934/69ad2165-9731-4a9e-b4a8-d8ea2ba4b377) |
 
 
 
 |                         Home(Dashboard)                       |
 |:---------------------------------------------------------:|
-| <img src="![WhatsApp Image 2024-02-07 at 13 08 16_06c01c8a](https://github.com/mahmood199/Dashboard/assets/58071934/c63fd77a-0bbd-4639-929f-00449e227dce)" > |
+| ![WhatsApp Image 2024-02-07 at 13 08 16_06c01c8a](https://github.com/mahmood199/Dashboard/assets/58071934/4e08a06e-6921-4877-b644-60b4eeeb0101) |
 
 
 
@@ -101,7 +107,7 @@ Things that are worth adding
 # LICENSE
 
 ```
-   Copyright 2023 Mahmood Ahmad
+   Copyright 2024 Mahmood Ahmad
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
