@@ -56,9 +56,9 @@ class MiddleBulgeShape : Shape {
 
             arcTo(
                 rect = Rect(
-                    left = width * 0.45f - circleRadiusInPx,
+                    left = width * 0.5f - circleRadiusInPx * 2,
                     top = 0f,
-                    right = width * 0.55f + circleRadiusInPx,
+                    right = width * 0.5f + circleRadiusInPx * 2,
                     bottom = circleRadiusInPx * 2
                 ),
                 startAngleDegrees = 180f,
