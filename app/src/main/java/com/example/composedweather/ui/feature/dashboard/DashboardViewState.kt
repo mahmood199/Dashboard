@@ -9,7 +9,7 @@ data class DashboardViewState(
     companion object {
         fun default(): DashboardViewState {
             return DashboardViewState(
-                isLoading = false,
+                isLoading = true,
                 contactNumber = "+91 7980638965",
                 dateRange = "Error",
                 totalClicksForToday = 0

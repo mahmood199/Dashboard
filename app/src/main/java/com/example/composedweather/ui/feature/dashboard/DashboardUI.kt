@@ -29,6 +29,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -88,7 +89,9 @@ fun DashboardUI(
         modifier = modifier.fillMaxSize()
     ) {
         if (it) {
-            ContentLoaderUI()
+            ContentLoaderUI(modifier = Modifier
+                .fillMaxSize()
+                .background(Color.White))
         } else {
             AnotherLayerOfConstraintLayoutWrapper(
                 state = state,

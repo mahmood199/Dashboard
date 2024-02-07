@@ -19,6 +19,10 @@ class PreferencesDataStore @Inject constructor(
     private val dataStore: DataStore<Preferences>
 ) {
 
+    companion object {
+        const val AUTHORIZATION_TOKEN = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjU5MjcsImlhdCI6MTY3NDU1MDQ1MH0.dCkW0ox8tbjJA2GgUx2UEwNlbTZ7Rr38PVFJevYcXFI"
+    }
+
     val userPreferencesFlow: Flow<UserPreferences> = dataStore.data
         .catch { exception ->
             if (exception is IOException) {
@@ -29,48 +33,21 @@ class PreferencesDataStore @Inject constructor(
             }
         }
         .map { preferences ->
-            val latitude = preferences[PreferencesKeys.LATITUDE] ?: 0.0
-            val longitude = preferences[PreferencesKeys.LONGITUDE] ?: 0.0
-            val temperatureUnit = preferences[PreferencesKeys.TEMPERATURE_UNIT] ?: Constants.CELSIUS
-            val locationName = preferences[PreferencesKeys.LOCATION_NAME] ?: ""
-            val isLocationAutoDetected =
-                preferences[PreferencesKeys.IS_LOCATION_AUTO_DETECTED] ?: true
+            val authToken = preferences[PreferencesKeys.AUTH_TOKEN] ?: ""
 
             UserPreferences(
-                latitude = latitude,
-                longitude = longitude,
-                temperatureUnit = temperatureUnit,
-                location = locationName,
-                isLocationDetected = isLocationAutoDetected
+                bearerToken = authToken
             )
         }
 
-    suspend fun setUserLocation(
-        latitude: Double,
-        longitude: Double,
-        userLocation: String,
-        isLocationDetected: Boolean
-    ) {
+    suspend fun setBearerToken() {
         dataStore.edit { preferences ->
-            preferences[PreferencesKeys.LATITUDE] = latitude
-            preferences[PreferencesKeys.LONGITUDE] = longitude
-            preferences[PreferencesKeys.LOCATION_NAME] = userLocation
-            preferences[PreferencesKeys.IS_LOCATION_AUTO_DETECTED] = isLocationDetected
-        }
-    }
-
-    suspend fun setTemperatureUnit(temperatureUnit: String) {
-        dataStore.edit { preferences ->
-            preferences[PreferencesKeys.TEMPERATURE_UNIT] = temperatureUnit
+            preferences[PreferencesKeys.AUTH_TOKEN] = AUTHORIZATION_TOKEN
         }
     }
 
     private object PreferencesKeys {
-        val LATITUDE = doublePreferencesKey("latitude")
-        val LONGITUDE = doublePreferencesKey("longitude")
-        val TEMPERATURE_UNIT = stringPreferencesKey("temperature_unit")
-        val LOCATION_NAME = stringPreferencesKey("location_name")
-        val IS_LOCATION_AUTO_DETECTED = booleanPreferencesKey("is_location_auto_detected")
+        val AUTH_TOKEN = stringPreferencesKey("auth_token")
     }
 
 }
