@@ -86,32 +86,16 @@ The folders are split into 5 boundaries:
 
 # Screenshots 📱
 
-|                         Home(Celsius, Current Info, Hourly Forecast, 10 days Forecast)                          |
+|                         Home(Dashboard)                       |
 |:---------------------------------------------------------:|
-| <img src="![Screenshot_2023-10-20-08-24-40-494_com example composedweather (1)](https://github.com/mahmood199/ComposedWeather/assets/58071934/cbc9f724-d6bb-4932-aeb3-08df3a41bc9a)
-" width="200px"> |
+| <img src="![WhatsApp Image 2024-02-07 at 13 08 15_f381925e](https://github.com/mahmood199/Dashboard/assets/58071934/2a3e5809-2201-4b48-a209-8bfb071b33bd)" width="200px"> |
 
 
-|                         Home(Celsius, Current Info, 10 days Forecast)                          |
+
+|                         Home(Dashboard)                       |
 |:---------------------------------------------------------:|
-| <img src="![Screenshot_2023-10-20-08-24-45-509_com example composedweather](https://github.com/mahmood199/ComposedWeather/assets/58071934/3ab0bf43-faeb-43b3-b500-21e785e0d1a7)
-" width="300px"> |
+| <img src="![WhatsApp Image 2024-02-07 at 13 08 16_06c01c8a](https://github.com/mahmood199/Dashboard/assets/58071934/c63fd77a-0bbd-4639-929f-00449e227dce)" width="200px"> |
 
-
-|                         Home(Celsius, 10 days Forecast)                           |
-|:---------------------------------------------------------:|
-| <img src="![Screenshot_2023-10-20-08-24-49-885_com example composedweather](https://github.com/mahmood199/ComposedWeather/assets/58071934/7875f7ac-253b-4e76-a3e3-bed15e452210)
-" width="300px"> |
-
-
-|                         Search(With Search Result)                          |
-|:---------------------------------------------------------:|
-| <img src="![Screenshot_2023-10-20-08-25-24-296_com example composedweather](https://github.com/mahmood199/ComposedWeather/assets/58071934/095685ae-e527-4bd4-9787-e619bf9c10b4)" width="300px> |
-
-
-|                         Recording of the App Flow                        |
-|:---------------------------------------------------------:|
-https://drive.google.com/file/d/11Q_j8K_mQI8fsHnHib5gTmrk3UzfIj9I/view
 
 
 # Improvements 🚀
